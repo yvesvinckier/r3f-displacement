@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import styled from "styled-components";
+import "./App.css";
+
+import Scene from "./components/Scene";
+
+const StyledcanvasWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const StyledImageContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+  margin-right: auto;
+  margin-left: auto;
+  width: 36vw;
+  height: 52vw;
+  border: 1px solid transparent;
+  border-radius: 900px;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledcanvasWrapper>
+      <StyledImageContainer>
+        <Canvas camera={{ position: [0, 0, 2], fov: 38 }}>
+          <Suspense fallback={null}>
+            <Scene />
+          </Suspense>
+        </Canvas>
+      </StyledImageContainer>
+    </StyledcanvasWrapper>
   );
 }
 
